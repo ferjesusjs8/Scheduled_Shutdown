@@ -33,10 +33,10 @@ namespace Desligamento_Programado
                 Console.WriteLine($" => Desligamento programado para as {choosenTime[0]}:{choosenTime[1]}hrs!!!");
             else
                 Console.WriteLine("Agendamento Cancelado!");
-            Thread.Sleep(6000);
+            Thread.Sleep(4000);
             Console.WriteLine();
             Console.WriteLine("Bye Bye");
-            Thread.Sleep(2000);
+            Thread.Sleep(4000);
         }
 
         private static void ScheduleShutdown(TimeSpan timeChoosed)

@@ -21,12 +21,12 @@ namespace Desligamento_Programado
 
             CalculateShutdown(choosenTime);
 
-            ChamarFinalizacao(choosenTime);
+            CallEndingProccess(choosenTime);
         }
 
         #region Methods
 
-        private static void ChamarFinalizacao(string[] choosenTime)
+        private static void CallEndingProccess(string[] choosenTime)
         {
             Console.WriteLine();
             if (!ValidateIfCancel(choosenTime))

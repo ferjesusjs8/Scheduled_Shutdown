@@ -17,20 +17,20 @@ namespace Desligamento_Programado
         {
             CallWelcome();
 
-            string[] choosenTime = GetChoosenTime();
+            string[] chosenTime = GetChoosenTime();
 
-            CalculateShutdown(choosenTime);
+            CalculateShutdown(chosenTime);
 
-            CallEndingProccess(choosenTime);
+            CallEndingProccess(chosenTime);
         }
 
         #region Methods
 
-        private static void CallEndingProccess(string[] choosenTime)
+        private static void CallEndingProccess(string[] chosenTime)
         {
             Console.WriteLine();
-            if (!ValidateIfCancel(choosenTime))
-                Console.WriteLine($" => Desligamento programado para as {choosenTime[0]}:{choosenTime[1]}hrs!!!");
+            if (!CancelValidate(chosenTime))
+                Console.WriteLine($" => Desligamento programado para as {chosenTime[0]}:{chosenTime[1]}hrs!!!");
             else
                 Console.WriteLine("Agendamento Cancelado!");
             Thread.Sleep(4000);
@@ -39,12 +39,12 @@ namespace Desligamento_Programado
             Thread.Sleep(4000);
         }
 
-        private static void ScheduleShutdown(TimeSpan timeChoosed)
+        private static void ScheduleShutdown(TimeSpan selectedTime)
         {
-            var shutdownProccess = new ProcessStartInfo("shutdown", $" /s /t {Math.Round(timeChoosed.TotalSeconds).ToString()}");
-            shutdownProccess.CreateNoWindow = true;
-            shutdownProccess.UseShellExecute = false;
-            Process.Start(shutdownProccess);
+            var shutdownProcess = new ProcessStartInfo("shutdown", $" /s /t {Math.Round(selectedTime.TotalSeconds).ToString()}");
+            shutdownProcess.CreateNoWindow = true;
+            shutdownProcess.UseShellExecute = false;
+            Process.Start(shutdownProcess);
         }
 
         private static void CalculateShutdown(string[] choosenTime)
@@ -59,13 +59,13 @@ namespace Desligamento_Programado
 
                 ScheduleShutdown(timeChoosed);
             }
-            else if (ValidateIfCancel(choosenTime))
+            else if (CancelValidate(choosenTime))
             {
                 CancelShutdown();
             }
         }
 
-        private static bool ValidateIfCancel(string[] choosenTime) => choosenTime[0].Contains("C", StringComparison.InvariantCultureIgnoreCase);
+        private static bool CancelValidate(string[] choosenTime) => choosenTime[0].Contains("C", StringComparison.InvariantCultureIgnoreCase);
 
         private static void CancelShutdown()
         {
